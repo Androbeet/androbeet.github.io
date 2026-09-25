@@ -1,0 +1,32 @@
+# Androbeet (Andrew)
+
+> Essays and original words for realities that never had names.
+
+Andrew (Androbeet) is a self-taught writer, philosopher, and content
+creator publishing essays and original terminology on philosophy, atheism, feminism,
+and the psychology of belief.
+
+## Lexicon
+https://androbeet.github.io/lexicon/ — 146 original terms coined by Andrew,
+each with its own page. See data/lexicon.json in the repo for the full structured
+list. A sample: Consortivulnus, Virilnorm, Gendarchy, Matriveiling, Femivoria, Consensum Fictum, Civitance, Nomocide, Clamocracy, Democrasia, Autopathia, Proprialienation, Cogniveil, Sanogenesis, Egochronia, and more.
+
+## Essays
+https://androbeet.github.io/essays/
+- Freedom Isn't a Day. It's a Debt.: Reframes freedom not as a single achieved moment, but as an ongoing debt society keeps asking you to repay. (https://androbeet.github.io/essays/freedom-isnt-a-day-its-a-debt.html)
+- The Currency Problem: Why India Keeps Having Children Until It Gets a Son: Examines how families treat sons as an economic asset and daughters as a debt, and what that does to the children caught in between. (https://androbeet.github.io/essays/the-currency-problem-why-india-keeps-having-children-until-i.html)
+- The Psychology of Being Compared to the Perfect Child: On the psychological cost of growing up measured against an idealized sibling or standard that was never really achievable. (https://androbeet.github.io/essays/the-psychology-of-being-compared-to-the-perfect-child.html)
+- The Entire Self-Help Industry Is Built on One Lie — And You Already Know What It Is: A critique of the self-help industry's core premise, and what it conveniently leaves out. (https://androbeet.github.io/essays/the-entire-self-help-industry-is-built-on-one-lie-and-you-al.html)
+- Consortivulnus: I Made a Word for a Wound That Had No Name: The original essay introducing Consortivulnus — a term for the specific harm of being hurt by someone who shares your own condition. (https://androbeet.github.io/essays/consortivulnus-i-made-a-word-for-a-wound-that-had-no-name.html)
+- The Witness Problem: On perception and testimony — what it means to witness something, and why that's less reliable than it feels. (https://androbeet.github.io/essays/the-witness-problem.html)
+- Can You Love Life and Still Believe It Has No Inherent Meaning??: Asks whether loving life requires believing it has inherent meaning, or whether the two can coexist without contradiction. (https://androbeet.github.io/essays/can-you-love-life-and-still-believe-it-has-no-inherent-meani.html)
+- 5 Problems with Modern Feminism and Solutions: A critical look at five specific shortcomings in how modern feminism is practiced, with a proposed fix for each. (https://androbeet.github.io/essays/5-problems-with-modern-feminism-and-solutions.html)
+- How Religious Creation Myths Became the Blueprint for the Systemic Oppression of Women: Traces how religious creation narratives set the template later used to justify the systemic oppression of women. (https://androbeet.github.io/essays/how-religious-creation-myths-became-the-blueprint-for-the-sy.html)
+- The Goodness of the Godless: Asks whether morality requires God, contrasting goodness done out of fear or reward with goodness done because another person matters. (https://androbeet.github.io/essays/the-goodness-of-the-godless.html)
+- Meaning Is Built, Not Found: Argues that meaning in life isn't something waiting to be discovered, but something constructed. (https://androbeet.github.io/essays/meaning-is-built-not-found.html)
+
+## About
+https://androbeet.github.io/about.html
+
+## Contact
+androbeetz@gmail.com

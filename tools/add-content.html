@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Add content — Androbeet (private tool)</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  body { font-family: -apple-system, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; background:#111; color:#eee; }
+  h1 { font-size: 20px; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+  .tabs button { padding: 8px 14px; border-radius: 6px; border: 1px solid #444; background: #1c1c1c; color: #eee; cursor: pointer; }
+  .tabs button.active { background: #b5251c; border-color: #b5251c; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  label { display: block; margin: 14px 0 4px; font-size: 13px; color: #aaa; }
+  input, textarea, select { width: 100%; padding: 9px; border-radius: 6px; border: 1px solid #444; background: #1c1c1c; color: #eee; font-size: 14px; }
+  textarea { min-height: 90px; font-family: inherit; }
+  button.go { margin-top: 18px; padding: 10px 18px; border-radius: 6px; border: none; background: #b5251c; color: #fff; cursor: pointer; font-size: 14px; }
+  pre { background: #000; padding: 14px; border-radius: 8px; overflow-x: auto; white-space: pre-wrap; word-break: break-word; margin-top: 18px; font-size: 13px; }
+  .hint { font-size: 12px; color: #888; margin-top: 6px; }
+  .copy { margin-top: 8px; padding: 6px 12px; font-size: 12px; border-radius: 6px; border: 1px solid #444; background:#1c1c1c; color:#eee; cursor:pointer; }
+</style>
+</head>
+<body>
+<h1>Add content — private tool, not linked anywhere public</h1>
+<p class="hint">Fill a form, copy the JSON it generates, paste it into the matching array in <code>data/*.json</code>, commit &amp; push. The site rebuilds automatically.</p>
+
+<div class="tabs">
+  <button class="active" data-tab="essay">New essay</button>
+  <button data-tab="word">New lexicon word</button>
+  <button data-tab="post">New post</button>
+</div>
+
+<div class="panel active" id="panel-essay">
+  <label>Title</label><input id="e-title">
+  <label>Short description (1 sentence)</label><textarea id="e-desc"></textarea>
+  <label>Tags (comma separated)</label><input id="e-tags" placeholder="Philosophy, Society">
+  <label>Full body — hosted natively on the site (leave blank if this one only lives on Medium)</label>
+  <textarea id="e-body" placeholder="Paragraph one.&#10;&#10;Paragraph two."></textarea>
+  <label>Medium URL (optional, used as the "read on Medium" link if body is blank)</label>
+  <input id="e-url" placeholder="https://medium.com/...">
+  <button class="go" onclick="genEssay()">Generate JSON</button>
+  <pre id="out-essay"></pre>
+  <button class="copy" onclick="copyOut('out-essay')">Copy</button>
+  <p class="hint">Paste this object into <code>data/essays.json</code> — add it at the top of the array (newest first).</p>
+</div>
+
+<div class="panel" id="panel-word">
+  <label>Word</label><input id="w-word">
+  <label>Pronunciation (optional, e.g. /or-VANE/)</label><input id="w-pron" placeholder="/word-STYLE/">
+  <label>Etymology (optional, e.g. auto + pathos)</label><input id="w-etym" placeholder="e.g. auto + pathos">
+  <label>Definition</label><textarea id="w-def"></textarea>
+  <label>Category</label>
+  <select id="w-cat">
+    <option>Feminism / Patriarchy</option>
+    <option>Government / System</option>
+    <option>Psychology</option>
+    <option>Philosophy</option>
+    <option>Society / Culture</option>
+    <option>Interior States</option>
+    <option>The Body</option>
+    <option>Thought &amp; Language</option>
+    <option>Between People</option>
+    <option>System</option>
+  </select>
+  <button class="go" onclick="genWord()">Generate JSON</button>
+  <pre id="out-word"></pre>
+  <button class="copy" onclick="copyOut('out-word')">Copy</button>
+  <p class="hint">Paste this object into <code>data/lexicon.json</code>.</p>
+</div>
+
+<div class="panel" id="panel-post">
+  <label>Caption</label><textarea id="p-caption"></textarea>
+  <label>Image filename (upload the file into assets/img/posts/ with this exact name)</label>
+  <input id="p-image" placeholder="assets/img/posts/my-photo.jpg">
+  <button class="go" onclick="genPost()">Generate JSON</button>
+  <pre id="out-post"></pre>
+  <button class="copy" onclick="copyOut('out-post')">Copy</button>
+  <p class="hint">Paste this object into <code>data/posts.json</code>.</p>
+</div>
+
+<script>
+document.querySelectorAll('.tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+function slugify(s) {
+  return s.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').slice(0, 60);
+}
+function today() { return new Date().toISOString().slice(0,10); }
+function copyOut(id) { navigator.clipboard.writeText(document.getElementById(id).textContent); }
+
+function genEssay() {
+  const title = document.getElementById('e-title').value.trim();
+  const desc = document.getElementById('e-desc').value.trim();
+  const tags = document.getElementById('e-tags').value.split(',').map(t => t.trim()).filter(Boolean);
+  const bodyRaw = document.getElementById('e-body').value.trim();
+  const url = document.getElementById('e-url').value.trim();
+  const bodyHtml = bodyRaw
+    ? bodyRaw.split(/\n\s*\n/).map(p => '<p>' + p.replace(/\n/g, '<br>') + '</p>').join('\n')
+    : null;
+  const obj = {
+    title, slug: slugify(title), description: desc, tags,
+    paid: false, external_url: url || null, body_html: bodyHtml, date: today()
+  };
+  document.getElementById('out-essay').textContent = JSON.stringify(obj, null, 2) + ',';
+}
+
+function genWord() {
+  const word = document.getElementById('w-word').value.trim();
+  const obj = {
+    word, slug: slugify(word),
+    etymology: document.getElementById('w-etym').value.trim(),
+    pronunciation: document.getElementById('w-pron').value.trim(),
+    definition: document.getElementById('w-def').value.trim(),
+    category: document.getElementById('w-cat').value
+  };
+  document.getElementById('out-word').textContent = JSON.stringify(obj, null, 2) + ',';
+}
+
+function genPost() {
+  const obj = {
+    caption: document.getElementById('p-caption').value.trim(),
+    image: document.getElementById('p-image').value.trim(),
+    date: today()
+  };
+  document.getElementById('out-post').textContent = JSON.stringify(obj, null, 2) + ',';
+}
+</script>
+</body>
+</html>
