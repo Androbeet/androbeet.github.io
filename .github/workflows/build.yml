@@ -1,0 +1,33 @@
+name: Build site
+
+on:
+  push:
+    paths:
+      - "data/**"
+      - "scripts/build.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Build site
+        run: python3 scripts/build.py
+
+      - name: Commit generated pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html about.html lexicon essays posts sitemap.xml robots.txt
+          git diff --quiet --cached || git commit -m "Rebuild site from data"
+          git push
