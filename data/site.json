@@ -1,0 +1,28 @@
+{
+  "name": "Androbeet",
+  "real_name": "Andrew",
+  "tagline": "Essays and original words for realities that never had names.",
+  "email": "androbeetz@gmail.com",
+  "socials": {
+    "mail": "mailto:androbeetz@gmail.com",
+    "youtube": "https://youtube.com/@androbeet?si=fq-o38ZmZFT8ui59",
+    "instagram": "https://instagram.com/androbeet_",
+    "medium": "https://medium.com/@androbeet"
+  },
+  "pfp": "assets/img/pfp.jpg",
+  "banner": "assets/img/banner.jpg",
+  "about_sections": [
+    {
+      "heading": "Who I am",
+      "body": "Androbeet (Andrew) is a self-taught writer, philosopher, and content creator. His work is about naming the unnamed \u2014 the gaps in our emotional and political vocabulary that leave people without language for their own experience."
+    },
+    {
+      "heading": "What I write about",
+      "body": "Philosophy, atheism, feminism, and the psychology of belief \u2014 why people inherit the ideas they inherit, and what it costs them to keep them."
+    },
+    {
+      "heading": "The Lexicon",
+      "body": "A running project of original terms words coined for realities that never had one. If you use a term from here, credit the source."
+    }
+  ]
+}
