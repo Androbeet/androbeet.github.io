@@ -91,7 +91,7 @@ SITE_URL = "https://androbeet.github.io"
 def layout(title, description, active_path, body, canonical_path="", json_ld=None, og_type="website"):
     canonical = f"{SITE_URL}{canonical_path}" if canonical_path else ""
     canonical_tag = f'<link rel="canonical" href="{canonical}">' if canonical else ""
-    og_image = f"{SITE_URL}/{SITE['banner']}"
+    og_image = f"{SITE_URL}/assets/img/social-preview.png"
     ld_tag = ""
     if json_ld:
         ld_tag = f'<script type="application/ld+json">{json.dumps(json_ld, ensure_ascii=False)}</script>'
